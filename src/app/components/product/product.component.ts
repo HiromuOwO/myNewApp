@@ -9,5 +9,15 @@ import {Product} from './../../models/product.model'
 export class ProductComponent {
   
   @Input() product!: Product;
+  ngOnInit(): void {
+    if (this.product && this.product.images) {
+      this.product.images = this.product.images.map((image: string) => this.cleanImageUrl(image));
+    }
+  }
 
+  cleanImageUrl(url: string): string {
+    return url.replace(/[\[\]\\"]/g, '');
+  }
 }
+
+
